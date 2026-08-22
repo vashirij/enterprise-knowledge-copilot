@@ -2,8 +2,7 @@ from app.generation.rag_service import ask_question
 
 
 question = (
-    "What is the maximum number of hours "
-    "a student employee can work while classes are in session?"
+    "What is the employee dental insurance deductible?"
 )
 
 result = ask_question(question)
