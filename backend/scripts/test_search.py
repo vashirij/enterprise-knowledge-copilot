@@ -5,17 +5,11 @@ query = "How much vacation can employees carry over?"
 
 results = search_documents(query)
 
-
-for result in results:
-
-    print("\n----------------")
-
+for chunk, similarity in results:
     print(
-        f"Source: {result.document_name}"
+        f"Similarity: {similarity:.2f}, "
+        f"Document: {chunk.document_name}, "
+        f"Page: {chunk.page_number}, "
+        f"Chunk Index: {chunk.chunk_index}, "
+        f"Content: {chunk.content}"
     )
-
-    print(
-        f"Page: {result.page_number}"
-    )
-
-    print(result.content)
