@@ -3,7 +3,7 @@ from pathlib import Path
 from app.database import SessionLocal
 from app.models.document import DocumentChunk
 from app.ingestion.pdf_parser import parse_pdf
-from app.ingestion.chunker import chunk_text
+from app.ingestion.chunker import semantic_chunk_text
 from app.services.embedding_service import embedding_service
 
 
@@ -21,7 +21,7 @@ def ingest_pdf(file_path: str):
 
         for page in pages:
 
-            chunks = chunk_text(
+            chunks = semantic_chunk_text(
                 page["text"]
             )
 
