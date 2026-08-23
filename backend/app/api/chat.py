@@ -12,6 +12,7 @@ router = APIRouter(
 
 class AskRequest(BaseModel):
     question: str
+    conversation_id: int | None = None
 
 
 class SourceResponse(BaseModel):
@@ -34,6 +35,7 @@ class AskResponse(BaseModel):
 def ask(request: AskRequest):
 
     question = request.question.strip()
+    conversation_id = request.conversation_id
 
     if not question:
         raise HTTPException(

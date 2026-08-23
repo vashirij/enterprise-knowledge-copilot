@@ -12,7 +12,6 @@ def ingest_pdf(file_path: str):
     db = SessionLocal()
 
     try:
-
         pages = parse_pdf(file_path)
 
         document_name = Path(file_path).name
@@ -45,11 +44,22 @@ def ingest_pdf(file_path: str):
 
         db.commit()
 
+        result = {
+            "document": document_name,
+            "pages": len(pages),
+            "chunks": total_chunks
+        }
+
         print(
             f"Ingested {document_name}: "
             f"{total_chunks} chunks"
         )
 
-    finally:
+        return result
 
+    except Exception:
+        db.rollback()
+        raise
+
+    finally:
         db.close()
